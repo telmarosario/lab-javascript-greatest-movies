@@ -36,52 +36,47 @@ function howManyMovies(listOfMovies) {
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 // Reduce
 function scoresAverage(listOfMovies) {
-  const scores = listOfMovies.map((movie) => movie.score); // First we get all the scores from each movie
-  const sum = scores.reduce((result, score) => result + score); // Then we sum it all
+  const sum = listOfMovies.reduce(function (result, movie) {
+    return result + movie.score;
+  }, 0);
+
   const average = sum / listOfMovies.length;
 
   return Number(average.toFixed(2));
-  /* 
-  Without the map
-  const sum = listOfMovies.reduce((result, movie) => result + movie.score); // Then we sum it all
-  const average = sum / listOfMovies.length; 
-
-  return Number(average.toFixed(2));
-*/
 
   /*
-  Without the map explicit function
-
-  const sum = listOfMovies.reduce(function(result, movie){
-            return result + movie.score
-  }, 0);
-
-  const average = sum / listOfMovies.length; 
-
-  return Number(average.toFixed(2));
-*/
+    Long way of doing it
+    const scores = listOfMovies.map((movie) => movie.score); // First we get all the scores from each movie
+    const sum = scores.reduce((result, score) => result + score); // Then we sum it all
+    const average = sum / listOfMovies.length;
+  
+    return Number(average.toFixed(2));
+   */
 }
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
-// Reduce for the second part
+// Try to chain filter with reduce
 function dramaMoviesScore(listOfMovies) {
   const dramaMovies = listOfMovies.filter((movie) =>
     movie.genre.includes('Drama')
   );
-  const dramaMoviesScores = dramaMovies.map((movie) => movie.score);
 
-  const sum = dramaMoviesScores.reduce((result, score) => result + score);
-  const average = sum / dramaMoviesScores.length;
-
-  /*   
-    Trying to use without the map
-  const sumScoreDramaMovies = dramaMovies.reduce(function(result, movie){
-                        return result + movie.score
-  }, 0)
-  );
-  const average = sumDramaMovies / dramaMovies.length; */
+  const sumScoreDramaMovies = dramaMovies.reduce(function (result, movie) {
+    return result + movie.score;
+  }, 0);
+  const average = sumScoreDramaMovies / dramaMovies.length;
 
   return Number(average.toFixed(2));
+  /*
+    Long way of doing it
+       const dramaMovies = listOfMovies.filter((movie) =>
+      movie.genre.includes('Drama')
+    );
+    const dramaMoviesScores = dramaMovies.map((movie) => movie.score);
+  
+    const sum = dramaMoviesScores.reduce((result, score) => result + score);
+    const average = sum / dramaMoviesScores.length;
+   */
 }
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
